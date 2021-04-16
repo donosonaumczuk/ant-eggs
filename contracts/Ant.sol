@@ -13,7 +13,7 @@ contract Ant is ERC721 {
     }
 
     using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
+    Counters.Counter private tokenIds;
 
     AntEgg antEgg;
     address owner;
@@ -41,8 +41,8 @@ contract Ant is ERC721 {
      */
     function mint() external returns (uint256) {
         require(antEgg.balanceOf(msg.sender) >= 1, "You need one EGG to mint one ANT");
-        _tokenIds.increment();
-        uint256 antId = _tokenIds.current();
+        tokenIds.increment();
+        uint256 antId = tokenIds.current();
         _mint(msg.sender, antId);
         lastEggCreationTimestampByAnt[antId] = 0;
         eggsLeftToBeCreatedByAnt[antId] = uint256(blockhash(block.number)) % 100;
